@@ -59,6 +59,7 @@ reconfig:
 # Runs whenever the build has not been configured successfully
 $(CONFIGURED_BUILD_DEP):
 	$(Q) meson setup $(BUILDRESULTS) $(INTERNAL_OPTIONS) $(OPTIONS)
+	sed -i 's%csrDT%csrD%' $(CONFIGURED_BUILD_DEP)
 
 .PHONY: clean
 clean:

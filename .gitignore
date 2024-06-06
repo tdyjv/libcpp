@@ -2,8 +2,8 @@
 buildresults/
 
 # Meson subprojects
-**/subprojects/**
-!**/subprojects/*.wrap
+#**/subprojects/**
+#!**/subprojects/*.wrap
 
 # Prerequisites
 *.d

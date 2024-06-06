@@ -560,7 +560,7 @@ endif
 # Handle pthread-specific logic
 if using_pthread == true
 	libthread = dependency('threads', native: false, required: false)
-	libthread_native = dependency('threads', native: true, required: true)
+#	libthread_native = dependency('threads', native: true, required: true)
 
 	# First, we'll a sanity check to make sure -pthread is actually supported!
 	if libthread.found()
@@ -684,22 +684,22 @@ libcxxabi = static_library('c++abi',
     build_by_default: meson.is_subproject() == false,
 )
 
-libcxxabi_native = static_library('c++abi_native',
-    libcxxabi_files + libcxxabi_native_files,
-    cpp_args: libcxxabi_compile_flags + libcxxabi_native_compile_flags,
-    link_args: libcxxabi_link_flags,
-    dependencies: [
-    	install_cpp_headers_dep,
-    	libcxxabi_native_dependencies,
-    	libcxxabi_header_deps,
-    	# libc dep must come bfore libcxxabi_include_dep
-    	# for proper include directory ordering
-    	libc_native_dep,
-    	libcxxabi_include_dep,
-    ],
-    native: true,
-    build_by_default: meson.is_subproject() == false,
-)
+#libcxxabi_native = static_library('c++abi_native',
+#    libcxxabi_files + libcxxabi_native_files,
+#    cpp_args: libcxxabi_compile_flags + libcxxabi_native_compile_flags,
+#    link_args: libcxxabi_link_flags,
+#    dependencies: [
+#    	install_cpp_headers_dep,
+#    	libcxxabi_native_dependencies,
+#    	libcxxabi_header_deps,
+#    	# libc dep must come bfore libcxxabi_include_dep
+#    	# for proper include directory ordering
+#    	libc_native_dep,
+#    	libcxxabi_include_dep,
+#    ],
+#    native: true,
+#    build_by_default: meson.is_subproject() == false,
+#)
 
 ##########################
 # libcxxabi Dependencies #
@@ -714,14 +714,14 @@ libcxxabi_dep = declare_dependency(
 	dependencies: libcxxabi_host_dependencies
 )
 
-libcxxabi_native_dep = declare_dependency(
-	include_directories: [
-		include_directories('include/c++abi', is_system: true),
-	],
-	link_with: libcxxabi_native,
-	link_args: libcxx_native_dep_link_flags,
-	dependencies: libcxxabi_native_dependencies
-)
+#libcxxabi_native_dep = declare_dependency(
+#	include_directories: [
+#		include_directories('include/c++abi', is_system: true),
+#	],
+#	link_with: libcxxabi_native,
+#	link_args: libcxx_native_dep_link_flags,
+#	dependencies: libcxxabi_native_dependencies
+#)
 
 ##########################
 # libcxx Library Targets #
@@ -747,19 +747,19 @@ libcpp = static_library('c++',
     build_by_default: meson.is_subproject() == false,
 )
 
-libcpp_native = static_library('c++_native',
-    libcpp_core_files,
-    cpp_args: libcxx_compile_flags + libcxx_native_compile_flags,
-    link_args: libcxx_link_flags,
-    dependencies: [
-    	install_cpp_headers_dep,
-    	libcxx_native_dependencies,
-    	libc_native_dep,
-    	libcxx_include_dep
-    ],
-    native: true,
-    build_by_default: meson.is_subproject() == false,
-)
+#libcpp_native = static_library('c++_native',
+#    libcpp_core_files,
+#    cpp_args: libcxx_compile_flags + libcxx_native_compile_flags,
+#    link_args: libcxx_link_flags,
+#    dependencies: [
+#    	install_cpp_headers_dep,
+#    	libcxx_native_dependencies,
+#    	libc_native_dep,
+#    	libcxx_include_dep
+#    ],
+#    native: true,
+#    build_by_default: meson.is_subproject() == false,
+#)
 
 libcpp_experimental = static_library('c++experimental',
     libcpp_experimental_files,
@@ -774,19 +774,19 @@ libcpp_experimental = static_library('c++experimental',
     build_by_default: meson.is_subproject() == false,
 )
 
-libcpp_experimental_native = static_library('c++experimental_native',
-    libcpp_experimental_files,
-    cpp_args: libcxx_compile_flags + libcxx_native_compile_flags,
-    link_args: libcxx_link_flags,
-    dependencies: [
-    	install_cpp_headers_dep,
-    	libcxx_native_dependencies,
-    	libc_native_dep,
-    	libcxx_include_dep
-    ],
-    native: true,
-    build_by_default: meson.is_subproject() == false,
-)
+#libcpp_experimental_native = static_library('c++experimental_native',
+#    libcpp_experimental_files,
+#    cpp_args: libcxx_compile_flags + libcxx_native_compile_flags,
+#    link_args: libcxx_link_flags,
+#    dependencies: [
+#    	install_cpp_headers_dep,
+#    	libcxx_native_dependencies,
+#    	libc_native_dep,
+#    	libcxx_include_dep
+#    ],
+#    native: true,
+#    build_by_default: meson.is_subproject() == false,
+#)
 
 if enable_filesystem == true
 	libcpp_fs = static_library('c++fs',
@@ -802,19 +802,19 @@ if enable_filesystem == true
 		build_by_default: meson.is_subproject() == false,
 	)
 
-	libcpp_fs_native = static_library('c++fs_native',
-		libcpp_filesystem_files,
-		cpp_args: libcxx_compile_flags + libcxx_native_compile_flags,
-		link_args: libcxx_link_flags,
-		dependencies: [
-			install_cpp_headers_dep,
-			libcxx_native_dependencies,
-			libc_native_dep,
-			libcxx_include_dep
-		],
-		native: true,
-		build_by_default: meson.is_subproject() == false,
-	)
+#	libcpp_fs_native = static_library('c++fs_native',
+#		libcpp_filesystem_files,
+#		cpp_args: libcxx_compile_flags + libcxx_native_compile_flags,
+#		link_args: libcxx_link_flags,
+#		dependencies: [
+#			install_cpp_headers_dep,
+#			libcxx_native_dependencies,
+#			libc_native_dep,
+#			libcxx_include_dep
+#		],
+#		native: true,
+#		build_by_default: meson.is_subproject() == false,
+#	)
 else
 	libcpp_fs = disabler()
 	libcpp_fs_native = disabler()
@@ -837,18 +837,18 @@ libcxx_full_dep = declare_dependency(
 	link_args: libcxx_host_dep_link_flags
 )
 
-libcxx_full_native_dep = declare_dependency(
-	include_directories: libcxx_include_directories,
-	link_with: [libcpp_native, libcpp_experimental_native],
-	dependencies: [
-		install_cpp_headers_dep,
-		libcxxabi_native_dep,
-		libc_native_dep,
-		libcxx_native_dependencies
-	],
-	compile_args: libcxx_dep_compile_flags + libcxx_native_dep_compiler_flags,
-	link_args: libcxx_native_dep_link_flags
-)
+#libcxx_full_native_dep = declare_dependency(
+#	include_directories: libcxx_include_directories,
+#	link_with: [libcpp_native, libcpp_experimental_native],
+#	dependencies: [
+#		install_cpp_headers_dep,
+#		libcxxabi_native_dep,
+#		libc_native_dep,
+#		libcxx_native_dependencies
+#	],
+#	compile_args: libcxx_dep_compile_flags + libcxx_native_dep_compiler_flags,
+#	link_args: libcxx_native_dep_link_flags
+#)
 
 libcxx_filesystem_dep = declare_dependency(
 	include_directories: libcxx_include_directories,
